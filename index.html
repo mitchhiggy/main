@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Uploader & Analyzer</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Upload, Graph, and Analyze Your Data</h1>
+      <p>Upload a CSV or Excel file to generate visualizations and instant descriptive analysis.</p>
+    </header>
+
+    <section class="panel">
+      <h2>1) Upload File</h2>
+      <input id="fileInput" type="file" accept=".csv,.xls,.xlsx" />
+      <p id="status" class="status">No file loaded.</p>
+    </section>
+
+    <section class="panel controls" id="chartControls" hidden>
+      <h2>2) Configure Chart</h2>
+      <div class="grid">
+        <label>
+          Chart Type
+          <select id="chartType">
+            <option value="scatter">Scatter</option>
+            <option value="line">Line</option>
+            <option value="bar">Bar</option>
+            <option value="histogram">Histogram</option>
+            <option value="box">Box</option>
+          </select>
+        </label>
+
+        <label>
+          X Axis
+          <select id="xColumn"></select>
+        </label>
+
+        <label>
+          Y Axis (numeric)
+          <select id="yColumn"></select>
+        </label>
+
+        <label>
+          Group/Aggregation
+          <select id="aggregation">
+            <option value="none">None</option>
+            <option value="count">Count</option>
+            <option value="sum">Sum</option>
+            <option value="avg">Average</option>
+          </select>
+        </label>
+      </div>
+      <button id="renderButton">Render Chart</button>
+    </section>
+
+    <section class="panel" id="chartPanel" hidden>
+      <h2>3) Visualization</h2>
+      <div id="chart"></div>
+    </section>
+
+    <section class="panel" id="analysisPanel" hidden>
+      <h2>4) Data Analysis</h2>
+      <div id="overview"></div>
+      <h3>Numeric Summary</h3>
+      <div id="summaryTable"></div>
+      <h3>Correlation Matrix (Pearson)</h3>
+      <div id="correlationTable"></div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
